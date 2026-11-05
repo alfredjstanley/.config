@@ -17,7 +17,7 @@ return {
     dependencies = { "williamboman/mason.nvim" },
     config = function()
       require("mason-lspconfig").setup({
-        ensure_installed = { "rust_analyzer", "gopls" },
+        ensure_installed = { "rust_analyzer", "gopls" , "lua_ls"},
         automatic_installation = true,
       })
     end,
@@ -56,6 +56,18 @@ return {
             }
         }
       })
+
+    -- Configure lua_ls
+    vim.lsp.config('lua_ls', {
+        capabilities = capabilities,
+                settings = {
+                    Lua = {
+                        diagnostics = {
+                            globals = {'vim'}
+                        }
+                    }
+                }
+            })
 
 
       -- Enable rust-analyzer when opening Rust files
