@@ -17,23 +17,24 @@ vim.keymap.set("v", "p", '"_dP', { desc = "Paste without yanking" })
 vim.keymap.set("n", "<leader>y", "<cmd>%y+<CR>", { desc = "Yank whole file to system clipboard" })
 
 -- Launch new tab with fish in it.
-vim.keymap.set("n", "<leader>t", "<cmd>tabe|te fish<CR>", { desc = "Launch new tab inside nvim"})
+vim.keymap.set("n", "<leader>t", "<cmd>tabe|te fish<CR>", { desc = "Launch new tab inside nvim" })
 
 -- Add a blank line below the current line
 vim.keymap.set("n", "<leader>o", function()
     local row = vim.api.nvim_win_get_cursor(0)[1]
     vim.api.nvim_buf_set_lines(0, row, row, false, { "" })
-end, {desc = "Add blank line below"})
+end, { desc = "Add blank line below" })
 
 -- Add a blank line above the current line
 vim.keymap.set("n", "<leader>O", function()
     local row = vim.api.nvim_win_get_cursor(0)[1]
     vim.api.nvim_buf_set_lines(0, row - 1, row - 1, false, { "" })
-end, {desc = "Add blank line above"})
+end, { desc = "Add blank line above" })
 
 -- Format file
 vim.keymap.set("n", "<leader>f", function()
-  vim.lsp.buf.format({ async = true })end, { desc = "Format file" })
+    vim.lsp.buf.format({ async = true })
+end, { desc = "Format file" })
 
 -- Quick save
 vim.keymap.set("n", "<leader>w", ":w<CR>", { desc = "Save file" })
@@ -54,13 +55,13 @@ vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "Go to definition" })
 
 -- Toggle inline hints
 vim.keymap.set('n', '<leader>hi', function()
-  vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = 0 }), { bufnr = 0 })
+    vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = 0 }), { bufnr = 0 })
 end, { desc = "Toggle inlay hints" })
 
 -- Toggle diagnostic virtual lines
 vim.keymap.set("n", "<leader>hl", function()
-  local on = vim.diagnostic.config().virtual_lines
-  vim.diagnostic.config({ virtual_lines = not on, virtual_text = false })
+    local on = vim.diagnostic.config().virtual_lines
+    vim.diagnostic.config({ virtual_lines = not on, virtual_text = false })
 end, { desc = "Toggle diagnostic lines" })
 
 -- Popup for the diagnostic under the cursor
