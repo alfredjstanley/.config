@@ -7,6 +7,4 @@ if status is-interactive
     # Show fortune instead
     fortune
     
-    # Add Postgress@18 to path
-    # set -x PATH /opt/homebrew/opt/postgresql@18/bin $PATH 
 end
