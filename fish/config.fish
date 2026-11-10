@@ -6,5 +6,7 @@ if status is-interactive
 
     # Show fortune instead
     fortune
-    
+
+    # Enable Vim-style key bindings
+    fish_vi_key_bindings   
 end
