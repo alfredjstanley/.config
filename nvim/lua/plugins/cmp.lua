@@ -3,10 +3,10 @@ return {
         "hrsh7th/nvim-cmp",
         event = "InsertEnter",
         dependencies = {
-            "hrsh7th/cmp-nvim-lsp", -- LSP completions
-            "hrsh7th/cmp-buffer", -- Buffer completions
-            "hrsh7th/cmp-path",   -- Path completions
-            "L3MON4D3/LuaSnip",   -- Snippet engine
+            "hrsh7th/cmp-nvim-lsp",     -- LSP completions
+            "hrsh7th/cmp-buffer",       -- Buffer completions
+            "hrsh7th/cmp-path",         -- Path completions
+            "L3MON4D3/LuaSnip",         -- Snippet engine
             "saadparwaiz1/cmp_luasnip", -- Snippet completions
         },
         config = function()
@@ -25,8 +25,8 @@ return {
                     ["<C-j>"] = cmp.mapping.select_next_item(), -- Next suggestion
                     ["<C-b>"] = cmp.mapping.scroll_docs(-4),
                     ["<C-f>"] = cmp.mapping.scroll_docs(4),
-                    ["<C-Space>"] = cmp.mapping.complete(),  -- Trigger completion
-                    ["<C-e>"] = cmp.mapping.abort(),         -- Close completion
+                    ["<C-Space>"] = cmp.mapping.complete(),            -- Trigger completion
+                    ["<C-e>"] = cmp.mapping.abort(),                   -- Close completion
                     ["<CR>"] = cmp.mapping.confirm({ select = true }), -- Confirm selection
                     ["<Tab>"] = cmp.mapping(function(fallback)
                         if cmp.visible() then
@@ -50,9 +50,9 @@ return {
 
                 sources = cmp.config.sources({
                     { name = "nvim_lsp" }, -- LSP
-                    { name = "luasnip" }, -- Snippets
-                    { name = "buffer" }, -- Text in current buffer
-                    { name = "path" }, -- File paths
+                    { name = "luasnip" },  -- Snippets
+                    { name = "buffer" },   -- Text in current buffer
+                    { name = "path" },     -- File paths
                 }),
 
                 formatting = {
