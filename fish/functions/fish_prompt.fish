@@ -73,12 +73,17 @@ function fish_prompt
         echo -n ']'
     
         # Date
-        _nim_prompt_wrapper $retc '' (date +%X)
+        _nim_prompt_wrapper $retc '' (date +%T)
+
+        # Make it into a two line prompt
+        echo
+        set_color $retc
+        echo -n '├─'
     
         # Vi-mode
         # The default mode prompt would be prefixed, which ruins our alignment.
-        function fish_mode_prompt
-        end
+        # function fish_mode_prompt
+        # end
     
         if test "$fish_key_bindings" = fish_vi_key_bindings
                 or test "$fish_key_bindings" = fish_hybrid_key_bindings
@@ -111,11 +116,15 @@ function fish_prompt
         test -n "$prompt_git"
         and _nim_prompt_wrapper $retc G $prompt_git
     
-        # Battery status
-        type -q acpi
-        and acpi -a 2>/dev/null | string match -rq off
-        and _nim_prompt_wrapper $retc B (acpi -b | cut -d' ' -f 4-)
-    
+        # System status: Battery, RAM and Wi-Fi
+        set -l bat (string trim < /sys/class/power_supply/BAT0/capacity) 
+        set -l ram (free | awk '/Mem:/ {printf "%.0f%%", ($2 - $7) / $2 * 100}')
+        set -l wifi (iw dev wlp1s0 link | awk '/signal:/ {print $2; found=1} END {if (!found) print "OFF"}')
+
+        _nim_prompt_wrapper $retc R $ram 
+        _nim_prompt_wrapper $retc B "$bat%"
+        _nim_prompt_wrapper $retc W $wifi 
+
         # New line
         echo
     

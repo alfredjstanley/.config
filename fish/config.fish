@@ -9,4 +9,9 @@ if status is-interactive
 
     # Enable Vim-style key bindings
     fish_vi_key_bindings   
+
+    # overriding the default implementaion for
+    # not display the default mode indicator
+    function fish_mode_prompt
+    end
 end
