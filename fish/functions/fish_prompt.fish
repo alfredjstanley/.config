@@ -80,11 +80,21 @@ function fish_prompt
         set_color $retc
         echo -n '├─'
     
+        # Virtual Environment
+        set -q VIRTUAL_ENV_DISABLE_PROMPT
+        or set -g VIRTUAL_ENV_DISABLE_PROMPT true
+        set -q VIRTUAL_ENV
+        and _nim_prompt_wrapper $retc V (path basename "$VIRTUAL_ENV")
+    
+        # git
+        set -l prompt_git (fish_git_prompt '%s')
+        test -n "$prompt_git"
+        and _nim_prompt_wrapper $retc G $prompt_git
+    
         # Vi-mode
         # The default mode prompt would be prefixed, which ruins our alignment.
         # function fish_mode_prompt
         # end
-    
         if test "$fish_key_bindings" = fish_vi_key_bindings
                 or test "$fish_key_bindings" = fish_hybrid_key_bindings
                 set -l mode
@@ -104,18 +114,6 @@ function fish_prompt
                 set mode $mode(set_color normal)
                 _nim_prompt_wrapper $retc '' $mode
         end
-    
-        # Virtual Environment
-        set -q VIRTUAL_ENV_DISABLE_PROMPT
-        or set -g VIRTUAL_ENV_DISABLE_PROMPT true
-        set -q VIRTUAL_ENV
-        and _nim_prompt_wrapper $retc V (path basename "$VIRTUAL_ENV")
-    
-        # git
-        set -l prompt_git (fish_git_prompt '%s')
-        test -n "$prompt_git"
-        and _nim_prompt_wrapper $retc G $prompt_git
-    
         # System status: Battery, RAM and Wi-Fi
         set -l bat (string trim < /sys/class/power_supply/BAT0/capacity) 
         set -l ram (free | awk '/Mem:/ {printf "%.0f%%", ($2 - $7) / $2 * 100}')
