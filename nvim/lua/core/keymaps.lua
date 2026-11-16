@@ -33,7 +33,12 @@ end, { desc = "Add blank line above" })
 
 -- Format file
 vim.keymap.set("n", "<leader>f", function()
-    vim.lsp.buf.format({ async = true })
+    if vim.bo.filetype == "rust" then
+        vim.cmd("silent !rustfmt --edition 2024 %")
+        vim.cmd("edit!")
+    else
+        vim.lsp.buf.format({ async = true })
+    end
 end, { desc = "Format file" })
 
 -- Quick save
