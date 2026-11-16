@@ -102,6 +102,7 @@ input {
     // outputs are sized in logical, or scaled, pixels.
     // For example, a 3840×2160 output with scale 2.0 will have a logical size of 1920×1080,
     // so to put another output directly adjacent to it on the right, set its x to 1920.
+
     // If the position is unset or results in an overlap, the output is instead placed
     // automatically.
     position x=1280 y=0
@@ -111,6 +112,7 @@ input {
 // Find more information on the wiki:
 // https://niri-wm.github.io/niri/Configuration:-Layout
 layout {
+    background-color "#171923"
     // Set gaps around windows in logical pixels.
     gaps 16
 
@@ -262,6 +264,10 @@ layout {
         // bottom 64
     }
 }
+    // customize overview background
+    overview {
+        backdrop-color "#24283b"
+    }
 
 // Add lines like this to spawn processes at startup.
 // Note that running niri as a session supports xdg-desktop-autostart,
