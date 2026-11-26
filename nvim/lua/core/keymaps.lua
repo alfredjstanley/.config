@@ -14,22 +14,28 @@ vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", { desc = "Move text up" })
 vim.keymap.set("v", "p", '"_dP', { desc = "Paste without yanking" })
 
 -- Yank whole file to system clipboard
-vim.keymap.set("n", "<leader>y", "<cmd>%y+<CR>", { desc = "Yank whole file to system clipboard" })
+vim.keymap.set("n", "<leader>y", "<cmd>%y+<CR>")
 
 -- Launch new tab with fish in it.
-vim.keymap.set("n", "<leader>t", "<cmd>tabe|te fish<CR>", { desc = "Launch new tab inside nvim" })
+vim.keymap.set("n", "<leader>T", "<cmd>tabe|te fish<CR>")
+
+-- Open vertical terminal split
+vim.keymap.set("n", "<leader>t", "<cmd>vsplit | terminal fish<CR>")
+
+-- Exit terminal mode
+vim.keymap.set("t", "<C-Space>", [[<C-\><C-n>]])
 
 -- Add a blank line below the current line
 vim.keymap.set("n", "<leader>o", function()
     local row = vim.api.nvim_win_get_cursor(0)[1]
     vim.api.nvim_buf_set_lines(0, row, row, false, { "" })
-end, { desc = "Add blank line below" })
+end)
 
 -- Add a blank line above the current line
 vim.keymap.set("n", "<leader>O", function()
     local row = vim.api.nvim_win_get_cursor(0)[1]
     vim.api.nvim_buf_set_lines(0, row - 1, row - 1, false, { "" })
-end, { desc = "Add blank line above" })
+end)
 
 -- Format file
 vim.keymap.set("n", "<leader>f", function()
@@ -40,6 +46,9 @@ vim.keymap.set("n", "<leader>f", function()
         vim.lsp.buf.format({ async = true })
     end
 end, { desc = "Format file" })
+
+-- Clear search highlights
+vim.keymap.set("n", "<leader>oh", "<cmd>noh<CR>", { desc = "Clear search highlights" })
 
 -- Quick save
 vim.keymap.set("n", "<leader>w", ":w<CR>", { desc = "Save file" })
