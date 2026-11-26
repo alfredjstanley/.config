@@ -48,7 +48,7 @@ vim.keymap.set("n", "<leader>f", function()
 end, { desc = "Format file" })
 
 -- Clear search highlights
-vim.keymap.set("n", "<leader>oh", "<cmd>noh<CR>", { desc = "Clear search highlights" })
+vim.keymap.set("n", "<leader>ho", "<cmd>noh<CR>", { desc = "Clear search highlights" })
 
 -- Quick save
 vim.keymap.set("n", "<leader>w", ":w<CR>", { desc = "Save file" })
